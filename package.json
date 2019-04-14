@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "cacheDirectories": ["client/node_modules", "server/node_modules"],
   "scripts": {
-    "start": "cd server/ && npm start",
+    "start": "cd client/ && npm start",
     "install-client": "npm install --prefix client",
     "install-server": "npm install --prefix server",
     "build-client": "cd client/ && npm build",
@@ -15,3 +15,6 @@
     "node": "11.9.0"
   }
 }
+
+
+//cd server/ && npm start
