@@ -1,5 +1,5 @@
 {
-  "name": "myreactapp",
+  "name": "bennywreact",
   "description": "a react app",
   "version": "1.0.0",
   "cacheDirectories": ["client/node_modules", "server/node_modules"],
