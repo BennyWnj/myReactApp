@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./bootstrap.min.css";
 
 class Todo extends Component {
     constructor(props) {
@@ -7,10 +8,10 @@ class Todo extends Component {
 
     render() {
         return (
-            <div>
+            <li>
                 <button>X</button>
-                <li>{this.props.task}</li>
-            </div>
+                {this.props.completed ? this.props.task : <strike>{this.props.task}</strike>}
+            </li>
         )
     }
 }
