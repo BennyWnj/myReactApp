@@ -1,0 +1,1 @@
+export MONGODB_URI="mongodb+srv://admin:bitsofgood@cluster0-kco44.mongodb.net/test?retryWrites=true"
