@@ -18,9 +18,11 @@ router.post('/add', (req, res) => {
         })
 });
 
-router.post('/remove', (req, res) => {
-    console.log(req.body);
-    TodoItem.findOneAndDelete(req);
+router.post('/remove/', (req, res) => {
+    console.log(Object.keys(req.body)[0]);
+    TodoItem
+        .findOneAndDelete({_id: Object.keys(req.body)[0]})
+        .then(_ => console.log("success"));
 });
 
 router.get('/all', (req, res) => {
