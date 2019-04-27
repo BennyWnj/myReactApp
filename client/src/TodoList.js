@@ -11,9 +11,10 @@ class TodoList extends Component {
         return (
             <div>
                 <ul className="navbar-nav">
-                    {this.props.todos.map((task, index) => <Todo task={task.taskText}
+                    {this.props.todos.map((task, index) => <Todo task={task.task}
                                             completed={task.completed}
-                                            xClick={() => this.props.todoXClick(index)}/>)}
+                                            xClick={() => this.props.todoXClick(index)}
+                                            key={task.id}/>)}
                 </ul>
             </div>
         )

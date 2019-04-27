@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import InputLine from "./InputLine";
 import TodoList from "./TodoList";
+import axios, {AxiosRequestConfig as response} from 'axios'
 import "./bootstrap.min.css";
 
 //cd server/ && npm start
-let tasks = [{taskText: "brush teeth", completed: false},
-    {taskText: "go to bed", completed: true},
-    {taskText: "be a good baoba", completed:true}];
+// let tasks = [{taskText: "brush teeth", completed: false},
+//     {taskText: "go to bed", completed: true},
+//     {taskText: "be a good baoba", completed:true}];
+
+const apiUrl = "/todos";
 
 class App extends Component {
 
@@ -18,17 +21,42 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({todos: tasks})
+    axios
+        .get(apiUrl + "/all")
+        // .then(console.log)
+        .then(({data}) => this.setState({todos: data}))
+        // .then(({data}) => console.log(data))
+        .catch(console.log);
   }
 
   addTodo(task) {
-      tasks.push({taskText: task, completed: false});
-      this.setState({todos: tasks});
+      axios
+          .post(apiUrl + "/add", task)
+          .then(
+              // this.setState({ todos: this.state.todos.concat(response.data)})
+               _ => axios.get(apiUrl + "/all")
+          //     ({ data }) =>
+          //           ({data}) => this.setState({todos: data})
+          //     // console.log(data)
+          )
+          .then(({data}) => this.setState({todos : data}))
+          // .then(console.log(this.state.todos))
+          .catch(console.log);
+      // tasks.push({taskText: task, completed: false});
+      // this.setState({todos: tasks});
   }
 
-  removeTodo(index) {
-      tasks.splice(index, 1);
-      this.setState({todos: tasks});
+  removeTodo(id) {
+      axios
+          .post(apiUrl + "/remove", id)
+          .then(_ => {
+              this.setState(state => ({
+                  todos: state.todos.filter(cur => cur._id !== id)
+              }));
+          })
+          .catch(console.log);
+      // tasks.splice(index, 1);
+      // this.setState({todos: tasks});
   }
 
 

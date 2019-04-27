@@ -1,10 +1,12 @@
-let TodoItem = require('../models/TodoItem');
+const TodoItem = require('../models/TodoItem');
 const express = require('express');
 const router = express.Router();
 
-router.get('/add', (req, res) => {
+router.post('/add', (req, res) => {
+
+    console.log(Object.keys(req.body)[0]);
     const testTodo = new TodoItem({
-        task: "test task"
+        task: Object.keys(req.body)[0]
     });
 
     testTodo.save()
@@ -13,6 +15,21 @@ router.get('/add', (req, res) => {
         })
         .catch(error => {
             res.send(error);
+        })
+});
+
+router.post('/remove', (req, res) => {
+    console.log(req.body);
+    TodoItem.findOneAndDelete(req);
+});
+
+router.get('/all', (req, res) => {
+    TodoItem.find()
+        .then(results => {
+        res.send(results)
+    })
+        .catch(err => {
+            res.send(err);
         })
 });
 
